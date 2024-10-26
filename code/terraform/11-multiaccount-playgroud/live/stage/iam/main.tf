@@ -12,7 +12,7 @@ terraform {
     bucket         = "terraform-state-626635445388-multiaccount-bucket"
     key            = "626635445388/eu-north-1/data-store/iam/terraform.tfstate"
     region         = "eu-north-1"
-    dynamodb_table = "terraform-626635445388-data-store-mysql-state-locking"
+    dynamodb_table = "terraform-626635445388-ls25-state-locking"
     encrypt        = true
   }
 }
@@ -69,7 +69,8 @@ module "iam_policy_bt26" {
                 "dynamodb:GetItem",
                 "dynamodb:Scan",
                 "dynamodb:Query",
-                "dynamodb:UpdateItem"
+                "dynamodb:UpdateItem",
+                "dynamodb:ListTables"
             ],
           "Resource": "arn:aws:dynamodb:eu-north-1:061051260191:table/*"
         },
@@ -90,7 +91,8 @@ module "iam_policy_bt26" {
         "s3:GetObjectVersion",
         "s3:GetObjectVersionTagging",
         "s3:GetObjectACL",
-        "s3:PutObjectACL"
+        "s3:PutObjectACL",
+        "s3:ListAllMyBuckets"
       ],
       "Resource": ["arn:aws:s3:::*"]
     },
